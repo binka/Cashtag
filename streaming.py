@@ -6,7 +6,7 @@
 
 #To use: sudo pip install tweepy
 
-#Change count to change the number of tweets returned
+
 
 
 import tweepy
@@ -21,6 +21,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
+#Change count to change the number of tweets returned
 myCount = 100
 results = api.search(q="Apple stock",count = myCount)
 
