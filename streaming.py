@@ -1,6 +1,14 @@
-#pip install tweepy
-#cashtag
-#change count to change the number of tweets returned
+#####################
+# Cashtag
+# Creators:  David Bittle, Lincoln Samelson, Chris Gray,
+# Alex Worth, Prad Kikkeri, Kiril Novrak
+#####################
+
+#To use: sudo pip install tweepy
+
+#Change count to change the number of tweets returned
+
+
 import tweepy
 consumer_key = "43b4urzsW8nMY3oGzB5tIIM8B"
 consumer_secret = "fbGLMhkFyipYbTAz0s0S6yrN6cDGGWnEMmNaciceYjr4sgEdP2"
