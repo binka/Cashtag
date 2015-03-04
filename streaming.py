@@ -1,7 +1,7 @@
 #####################
 # Cashtag
 # Creators:  David Bittle, Lincoln Samelson, Chris Gray,
-# Alex Worth, Prad Kikkeri, Kiril Novrak
+# Alex Worth, Prad Kikkeri, Kiril Novik
 #####################
 
 #To use: sudo pip install tweepy
