@@ -5,6 +5,8 @@
 #####################
 
 #To use: sudo pip install tweepy
+#        sudo pip install yahoo-finance
+#        Make sure to download the constituents.csv file from GitHub
 
 import csv
 import tweepy
