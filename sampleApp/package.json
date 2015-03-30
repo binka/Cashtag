@@ -1,0 +1,15 @@
+{
+  "name": "sampleApp",
+  "version": "1.0.0",
+  "description": "A Sample Node and Express Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kirill Novik",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.12.3"
+  }
+}

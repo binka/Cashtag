@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>three.js css3d - youtube</title>
+		<style>
+			html, body {
+				height: 100%;
+			}
+
+			body {
+				background-color: #ffffff;
+				background-image: url("http://www.psdgraphics.com/file/colorful-triangles-background.jpg");
+				background-size:   cover;                      /* <------ */
+    		background-repeat: no-repeat;
+    		background-position: center center;
+				margin: 0;
+				font-family: Arial;
+				overflow: hidden;
+			}
+			#container {
+				position: absolute;
+				height: 300px;
+				width: 100%;
+				bottom: 0;
+			}
+
+			.highcharts-background, .highcharts-scrollbar, .highcharts-range-selector-buttons, .highcharts-input-group, .highcharts-navigator {
+				opacity: 0;
+			}
+
+			.highcharts-grid {
+				opacity: 0.5;
+			}
+
+			.blocker {
+				width: '480px';
+				height: '200px';
+				background: rgba(194,255,243,0.7);
+				box-shadow: 0px 0px 12px rgba(255,255,255,0.75);
+				border: 1px solid rgba(255,255,255,0.75);
+				text-align: center;
+				cursor: default;
+			}
+
+			.blocker:hover {
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+				border: 1px solid rgba(255,255,255,0.75);
+			}
+
+				.blocker .header {
+					position: absolute;
+					top: 20px;
+					left: 20px;
+					font-size: 20px;
+					font-weight: bold;
+					color: rgba(100,100,100,0.75);
+					text-shadow: 0px 0px 12px rgba(255,255,255,1);
+
+				}
+
+				.blocker .text {
+					position: absolute;
+					text-align: left;
+					top: 50px;
+					left: 20px;
+					right: 20px;
+					font-size: 16px;
+					color: rgba(100,100,100,0.75);
+				}
+
+
+			#search {
+				opacity: 0;
+				position: absolute;
+				bottom: 30px;
+				width: 100%;
+				text-align: center;
+			}
+
+			#search input {
+				opactiy: 0;
+				color: #ffffff;
+				background-color: transparent;
+				border: 1px solid #0080ff;
+				padding: 10px;
+				font-size: 20px;
+				text-transform: uppercase;
+				-webkit-border-radius: 0px; /* workaround for ios safari */
+			}
+
+			#search button {
+				opactiy: 0;
+				color: #0080ff;
+				background-color: transparent;
+				border: 1px solid #0080ff;
+				padding: 10px;
+				font-size: 20px;
+				text-transform: uppercase;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="../build/three.min.js"></script>
+
+		<script src="js/libs/tween.min.js"></script>
+		<script src="js/renderers/CSS3DRenderer.js"></script>
+		<div id="containerGL"></div>
+		<div id="container"></div>
+		<div id="search"><input id="query" type="text" value="cats"><button id="button">search</button></div>
+
+		<script>
+		var table = [
+			["Meet PlayStation Underground: <a href='http://bit.ly/1yt7P0d'>link</a>  A new show about video games. We play Amplitude w/ @Harmonix https://youtu.be/S3RS5ZUQZSI", "Test Header"],
+			["PlayStation Music, which lets you play Spotify during games, launches in 41 countries around the world http://on.mash.to/1xtuC0D ","Test Header"]
+			["Drifty Grabs $2.6 Million To Turn Web Developers Into Mobile App Makers http://tcrn.ch/1ErlUTc  by @sarahintampa", "Test Header"]
+		];
+			var camera, scene, renderer;
+			var player;
+
+			var auto = true;
+
+			// Floating Element
+			var Element = function ( entry ) {
+				var index = Math.round(Math.random())*3;
+				var dom = document.createElement( 'div' );
+				dom.style.width = '480px';
+				dom.style.height = '200px';
+
+				var image = document.createElement( 'img' ); // this element is needed because it has "load" event, and it seems "div" does not.
+				image.style.position = 'absolute';
+				image.style.width = '480px';
+				image.style.height = '200px';
+				image.style.background = 'rgba(0,0,0,0.5)';
+				image.style.opacity = 0;
+				image.src = entry.media$group.media$thumbnail[ 2 ].url;
+				dom.appendChild( image );
+
+
+				var blocker = document.createElement( 'div' );
+				blocker.className = 'blocker';
+				blocker.style.position = 'absolute';
+				blocker.style.width = '480px';
+				blocker.style.height = '200px';
+				dom.appendChild( blocker );
+
+				var header = document.createElement( 'div' );
+					header.className = 'header';
+					blocker.appendChild( header );
+
+				var text = document.createElement( 'div' );
+					text.className = 'text';
+					blocker.appendChild( text );
+
+				var object = new THREE.CSS3DObject( dom );
+				object.position.x = Math.random() * 4000 - 2000;
+				// object.position.y = Math.random() * 2000 - 1000;
+				object.position.y = 3000;
+				object.position.z = Math.random() * - 5000;
+
+				//
+
+				image.addEventListener( 'load', function ( event ) {
+
+					//button.style.visibility = 'visible';
+					text.textContent = table[index][0];
+					header.textContent = table[index][1];
+					new TWEEN.Tween( object.position )
+						.to( { y: Math.random() * 2000 - 1000 }, 2000 )
+						.easing( TWEEN.Easing.Exponential.Out )
+						.start();
+
+				}, false );
+
+				dom.addEventListener( 'mouseover', function () {
+
+					button.style.WebkitFilter = '';
+					//blocker.style.box-shadow = "0px 0px 12px rgba(0,255,255,0.75)";
+					blocker.style.background = 'rgba(194,255,243,0.7)';
+					//blocker.style.border = "1px solid rgba(127,255,255,0.75)";
+
+				}, false );
+
+				dom.addEventListener( 'mouseout', function () {
+
+					button.style.WebkitFilter = 'grayscale()';
+					blocker.style.background = 'rgba(194,255,243,0.75)';
+
+				}, false );
+
+				dom.addEventListener( 'click', function ( event ) {
+
+					event.stopPropagation();
+
+					auto = false;
+
+
+
+					//
+
+					var prev = object.position.z + 400;
+
+					new TWEEN.Tween( camera.position )
+						.to( { x: object.position.x, y: object.position.y - 25 }, 1500 )
+						.easing( TWEEN.Easing.Exponential.Out )
+						.start();
+
+					new TWEEN.Tween( { value: prev } )
+						.to( { value: 0  }, 2000 )
+						.onUpdate( function () {
+
+							move( this.value - prev );
+							prev = this.value;
+
+						} )
+						.easing( TWEEN.Easing.Exponential.Out )
+						.start();
+
+				}, false );
+
+				return object;
+
+			};
+
+			init();
+			animate();
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 5000 );
+				camera.position.y = - 25;
+
+				scene = new THREE.Scene();
+
+				renderer = new THREE.CSS3DRenderer();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.domElement.style.position = 'absolute';
+				renderer.domElement.style.top = 0;
+				document.getElementById( 'containerGL' ).appendChild( renderer.domElement );
+
+				//
+
+				var query = document.getElementById( 'query' );
+
+				query.addEventListener( 'keyup', function ( event ) {
+
+					if ( event.keyCode === 13 ) {
+
+						search( query.value );
+
+					}
+
+				}, false );
+
+				var button = document.getElementById( 'button' );
+				button.addEventListener( 'click', function ( event ) {
+
+					search( query.value );
+
+				}, false );
+
+				if ( window.location.hash.length > 0 ) {
+
+					query.value = window.location.hash.substr( 1 );
+
+				}
+
+				search( query.value );
+
+				document.body.addEventListener( 'mousewheel', onMouseWheel, false );
+
+				document.body.addEventListener( 'click', function ( event ) {
+
+					auto = true;
+
+					if ( player !== undefined ) {
+
+						player.parentNode.removeChild( player );
+						player = undefined;
+
+					}
+
+					new TWEEN.Tween( camera.position )
+							.to( { x: 0, y: - 25 }, 1500 )
+							.easing( TWEEN.Easing.Exponential.Out )
+							.start();
+
+				}, false );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function search( query ) {
+
+				window.location.hash = query;
+
+				for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+
+					( function () {
+
+						var object = scene.children[ i ];
+						var delay = i * 15;
+
+						new TWEEN.Tween( object.position )
+							.to( { y: - 2000 }, 1000 )
+							.delay( delay )
+							.easing( TWEEN.Easing.Exponential.In )
+							.onComplete( function () {
+
+								scene.remove( object );
+
+							} )
+							.start();
+
+					} )();
+
+				}
+
+				var request = new XMLHttpRequest();
+				request.addEventListener( 'load', onData, false );
+				request.open( 'GET', 'https://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=50&q=' + query, true );
+				request.send( null );
+
+			}
+
+			function onData( event ) {
+
+				var data = JSON.parse( event.target.responseText );
+				var entries = data.feed.entry;
+
+				// console.log( entries );
+
+				for ( var i = 0; i < entries.length; i ++ ) {
+
+					( function ( data, time ) {
+
+						setTimeout( function () {
+
+							scene.add(new Element( data ));
+
+						}, time );
+
+					} )( entries[ i ], i * 15 );
+
+				}
+
+			}
+
+			function move( delta ) {
+
+				for ( var i = 0; i < scene.children.length; i ++ ) {
+
+					var object = scene.children[ i ];
+
+					object.position.z += delta;
+
+					if ( object.position.z > 0 ) {
+
+						object.position.z -= 5000;
+
+					} else if ( object.position.z < - 5000 ) {
+
+						object.position.z += 5000;
+
+					}
+
+				}
+
+			}
+
+			function onMouseWheel( event ) {
+
+				move( event.wheelDelta );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				TWEEN.update();
+
+				if ( auto === true ) {
+
+					move( 1 );
+
+				}
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+		<script type="text/javascript">
+$(function () {
+    $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+
+        // Create the chart
+        $('#container').highcharts('StockChart', {
+
+
+            rangeSelector : {
+                selected : 1
+            },
+
+            title : {
+                text : 'AAPL Stock Price'
+            },
+
+            series : [{
+                name : 'AAPL Stock Price',
+                data : data,
+                type : 'area',
+                threshold : null,
+                tooltip : {
+                    valueDecimals : 2
+                },
+                fillColor : {
+                    linearGradient : {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops : [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                }
+            }]
+        });
+    });
+});
+
+		</script>
+		<script src="/js/highstock.js"></script>
+		<script src="/js/modules/exporting.js"></script>
+
+	</body>
+</html>

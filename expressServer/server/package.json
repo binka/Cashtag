@@ -1,0 +1,14 @@
+{
+    "author": "Kirill Novik",
+    "name": "server",
+    "version": "0.0.1",
+    "description": "Tiny Express Server",
+    "main": "server",
+    "keywords": [
+        "server"
+    ],
+    "dependencies": {},
+    "engines": {
+        "node": "*"
+    }
+}

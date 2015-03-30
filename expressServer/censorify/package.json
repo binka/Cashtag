@@ -4,6 +4,14 @@
     "version": "0.1.1",
     "description": "Censors words out of text",
     "main": "censortext",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kino6052/Tutorials/tree/master/expressServer/censorify"
+    },
+    "keywords": [
+        "censor",
+        "words"
+    ],
     "dependencies": {},
     "engines": {
         "node": "*"

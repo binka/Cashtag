@@ -1,0 +1,93 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 verbose publish [ '.' ]
+6 silly cache add args [ '.', null ]
+7 verbose cache add spec .
+8 silly cache add parsed spec { raw: '.',
+8 silly cache add   scope: null,
+8 silly cache add   name: null,
+8 silly cache add   rawSpec: '.',
+8 silly cache add   spec: 'C:\\Users\\Kirill\\Dropbox\\Library\\CSCI\\Web Development\\Tutorials\\expressServer\\censorify',
+8 silly cache add   type: 'directory' }
+9 verbose addLocalDirectory C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package.tgz not in flight; packing
+10 verbose tar pack [ 'C:\\Users\\Kirill\\AppData\\Roaming\\npm-cache\\censorify\\0.1.1\\package.tgz',
+10 verbose tar pack   'C:\\Users\\Kirill\\Dropbox\\Library\\CSCI\\Web Development\\Tutorials\\expressServer\\censorify' ]
+11 verbose tarball C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package.tgz
+12 verbose folder C:\Users\Kirill\Dropbox\Library\CSCI\Web Development\Tutorials\expressServer\censorify
+13 info prepublish censorify@0.1.1
+14 verbose addLocalTarball adding from inside cache C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package.tgz
+15 silly cache afterAdd censorify@0.1.1
+16 verbose afterAdd C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package\package.json not in flight; writing
+17 verbose afterAdd C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package\package.json written
+18 silly publish { author: { name: 'Brad Dayley' },
+18 silly publish   name: 'censorify',
+18 silly publish   version: '0.1.1',
+18 silly publish   description: 'Censors words out of text',
+18 silly publish   main: 'censortext',
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'https://github.com/kino6052/Tutorials/tree/master/expressServer/censorify' },
+18 silly publish   keywords: [ 'censor', 'words' ],
+18 silly publish   dependencies: {},
+18 silly publish   engines: { node: '*' },
+18 silly publish   readme: 'Dummy readme\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   _id: 'censorify@0.1.1',
+18 silly publish   scripts: {},
+18 silly publish   _shasum: 'b99737276bfd72473812eee372baefc60d580f06',
+18 silly publish   _from: '.' }
+19 silly mapToRegistry name censorify
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/censorify
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading C:\Users\Kirill\AppData\Roaming\npm-cache\censorify\0.1.1\package.tgz
+25 verbose request uri https://registry.npmjs.org/censorify
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 5:29:54 PM
+28 verbose request id 26289a835081386b
+29 http request PUT https://registry.npmjs.org/censorify
+30 http 401 https://registry.npmjs.org/censorify
+31 verbose headers { date: 'Wed, 25 Mar 2015 23:29:58 GMT',
+31 verbose headers   server: 'Apache',
+31 verbose headers   'content-type': 'application/json',
+31 verbose headers   'cache-control': 'max-age=60',
+31 verbose headers   'content-length': '38',
+31 verbose headers   'accept-ranges': 'bytes',
+31 verbose headers   via: '1.1 varnish',
+31 verbose headers   'x-served-by': 'cache-sjc3133-SJC',
+31 verbose headers   'x-cache': 'MISS',
+31 verbose headers   'x-cache-hits': '0',
+31 verbose headers   'x-timer': 'S1427326198.558788,VS0,VE135',
+31 verbose headers   'keep-alive': 'timeout=10, max=50',
+31 verbose headers   connection: 'Keep-Alive' }
+32 verbose request invalidating C:\Users\Kirill\AppData\Roaming\npm-cache\registry.npmjs.org\censorify on PUT
+33 error publish Failed PUT 401
+34 verbose stack Error: Request was not authorized : censorify
+34 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:254:14)
+34 verbose stack     at Request._callback (C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:178:14)
+34 verbose stack     at Request.self.callback (C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\request.js:344:22)
+34 verbose stack     at Request.emit (events.js:110:17)
+34 verbose stack     at Request.<anonymous> (C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\request.js:1239:14)
+34 verbose stack     at Request.emit (events.js:129:20)
+34 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\request.js:1187:12)
+34 verbose stack     at IncomingMessage.emit (events.js:129:20)
+34 verbose stack     at _stream_readable.js:908:16
+34 verbose stack     at process._tickCallback (node.js:355:11)
+35 verbose statusCode 401
+36 verbose pkgid censorify
+37 verbose cwd C:\Users\Kirill\Dropbox\Library\CSCI\Web Development\Tutorials\expressServer\censorify
+38 error Windows_NT 6.3.9600
+39 error argv "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+40 error node v0.12.0
+41 error npm  v2.5.1
+42 error code E401
+43 error Request was not authorized : censorify
+44 error If you need help, you may report this error at:
+44 error     <http://github.com/npm/npm/issues>
+45 verbose exit [ 1, true ]
