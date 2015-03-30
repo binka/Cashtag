@@ -1,0 +1,29 @@
+[33mcommit ae7910e8d00410471729713b48a64d50a13663b3[m
+Author: Lincoln Samelson <lincoln.samelson@colorado.edu>
+Date:   Tue Mar 3 19:20:02 2015 -0700
+
+    Moved comments
+
+[33mcommit 3dd6af69a70cb7191f25bb5271ecbc0c76275ec2[m
+Author: Lincoln Samelson <lincoln.samelson@colorado.edu>
+Date:   Tue Mar 3 19:17:57 2015 -0700
+
+    Fixed Comments
+
+[33mcommit 7bbdbf45f1966e73d774ad0d8df8549d5f73d20d[m
+Author: Lincoln Samelson <lincoln.samelson@colorado.edu>
+Date:   Tue Mar 3 18:59:20 2015 -0700
+
+    Added comments
+
+[33mcommit b6d4361ae5c4aa33e095788b6cda137c3955fa0a[m
+Author: David Bittle <user@cu-cs-vm.(none)>
+Date:   Tue Mar 3 18:39:26 2015 -0700
+
+    A way to query the twitter stream
+
+[33mcommit 437325c962682be9fa7460e05025b164de1cf15f[m
+Author: kino6052 <kino6052@colorado.edu>
+Date:   Thu Feb 26 22:59:05 2015 -0700
+
+    Add Frontend Skeleton
