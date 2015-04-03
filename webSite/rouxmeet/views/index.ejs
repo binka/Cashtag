@@ -5,6 +5,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<title>three.js css3d - youtube</title>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+		<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
 		<style>
 			html, body {
 				height: 100%;
@@ -20,19 +22,25 @@
 				font-family: Arial;
 				overflow: hidden;
 			}
+			.cashtag {
+				font-family: 'Shadows Into Light', serif;
+				font-size: 50px;
+				font-weight: bold;
+				color: rgb(72,61,139);
+				text-align: center;
+			}
 			#container {
 				position: absolute;
-				height: 300px;
 				width: 100%;
 				bottom: 0;
 			}
 
 			.highcharts-background, .highcharts-scrollbar, .highcharts-range-selector-buttons, .highcharts-input-group, .highcharts-navigator {
-				opacity: 0;
+				visibility: hidden;
 			}
 
 			.highcharts-grid {
-				opacity: 0.5;
+				opacity: 0.2;
 			}
 
 			.blocker {
@@ -108,16 +116,14 @@
 
 		<script src="js/libs/tween.min.js"></script>
 		<script src="js/renderers/CSS3DRenderer.js"></script>
+
 		<div id="containerGL"></div>
 		<div id="container"></div>
 		<div id="search"><input id="query" type="text" value="cats"><button id="button">search</button></div>
 
 		<script>
 		var table = [
-			["Meet PlayStation Underground: <a href='http://bit.ly/1yt7P0d'>link</a>  A new show about video games. We play Amplitude w/ @Harmonix https://youtu.be/S3RS5ZUQZSI", "Test Header"],
-			["PlayStation Music, which lets you play Spotify during games, launches in 41 countries around the world http://on.mash.to/1xtuC0D ","Test Header"]
-			["Drifty Grabs $2.6 Million To Turn Web Developers Into Mobile App Makers http://tcrn.ch/1ErlUTc  by @sarahintampa", "Test Header"]
-		];
+			["Meet PlayStation Underground: <a href='http://bit.ly/1yt7P0d'>link</a>  A new show about video games. We play Amplitude w/ @Harmonix https://youtu.be/S3RS5ZUQZSI", "Playstation Underground"]];
 			var camera, scene, renderer;
 			var player;
 
@@ -125,7 +131,7 @@
 
 			// Floating Element
 			var Element = function ( entry ) {
-				var index = Math.round(Math.random())*3;
+				var index = 0;
 				var dom = document.createElement( 'div' );
 				dom.style.width = '480px';
 				dom.style.height = '200px';
@@ -412,18 +418,30 @@ $(function () {
 
         // Create the chart
         $('#container').highcharts('StockChart', {
-
-
+						chart: {
+            	height: 200
+        		},
+						scrollbar: {
+            	enabled: false
+        		},
+						navigator: {
+            	enabled: false
+        		},
+						navigation: {
+            	buttonOptions: {
+	                enabled: false
+	            }
+        		},
             rangeSelector : {
                 selected : 1
             },
 
             title : {
-                text : 'AAPL Stock Price'
+                text : ''
             },
 
             series : [{
-                name : 'AAPL Stock Price',
+                name : '',
                 data : data,
                 type : 'area',
                 threshold : null,
@@ -442,7 +460,29 @@ $(function () {
                         [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
                     ]
                 }
-            }]
+            }],
+
+						plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function (e) {
+																auto = true;
+																table[0] = ["PlayStation Music, which lets you play Spotify during games, launches in 41 countries around the world http://on.mash.to/1xtuC0D ","Play Station Music"];
+																new TWEEN.Tween( camera.position )
+																		.to( { x: 0, y: - 25 }, 1500 )
+																		.easing( TWEEN.Easing.Exponential.Out )
+																		.start();
+																search(query);
+														}
+                        }
+                    },
+                    marker: {
+                        lineWidth: 1
+                    }
+                }
+            },
         });
     });
 });
