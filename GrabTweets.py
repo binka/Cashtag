@@ -5,6 +5,7 @@
 #####################
 
 #To use: sudo pip install tweepy
+#        sudo pip install pymongo
 #        sudo pip install yahoo-finance
 #        Make sure to download the constituents.csv file from GitHub
 import time
@@ -22,37 +23,19 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
-
-#Change count to change the number of tweets returned
-myCount = 1
-tweets = []
-ticker = ""
-Apple = Share('AAPL')
-print "The opening price of Apple was " + Apple.get_open() + "\n"
-api.filter(track=['Apple', 'stock'])
-results = api.search(q="#Apple #stock",count = myCount)
+# file name that you want to open is the second argument
 save_file = open('tweets.json', 'a')
-save_file.write(str(results))
 
+class CustomStreamListener(tweepy.StreamListener):
+    def __init__(self, api):
+        self.api = api
+        super(tweepy.StreamListener, self).__init__()
 
-for result in results:
-    print (result.text)
+        self.save_file = tweets
 
-		
-def csv_reader(file_obj):
-    """
-    Read a csv file
-    """
-    StockList = []
-    reader = csv.reader(file_obj)
-    for row in reader:
-        stock = set(line[0].strip() for line in reader)	
-        StockList.append(stock)
-        #print stock	
-    return StockList
-		
-if __name__ == "__main__":
-    csv_path = "constituents.csv"
-    with open(csv_path, "rb") as f_obj:
-        csv_reader(f_obj)
-
+    def on_data(self, tweet):
+		Apple = Share('AAPL')
+		results = api.search(q="#Apple #stock",count = myCount)
+		print results
+		self.save_file.append(json.loads(tweet))
+		save_file.write(str(results))
