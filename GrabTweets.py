@@ -24,18 +24,9 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 # file name that you want to open is the second argument
-save_file = open('tweets.json', 'a')
-
-class CustomStreamListener(tweepy.StreamListener):
-    def __init__(self, api):
-        self.api = api
-        super(tweepy.StreamListener, self).__init__()
-
-        self.save_file = tweets
-
-    def on_data(self, tweet):
-		Apple = Share('AAPL')
-		results = api.search(q="#Apple #stock",count = myCount)
-		print results
-		self.save_file.append(json.loads(tweet))
-		save_file.write(str(results))
+#save_file = open('tweets.json', 'a')
+save_file = open('tweetText.txt', 'w')
+for result in api.search(q="AAPL"):
+	Tweet = result
+	print Tweet.text
+	save_file.write(result.text)

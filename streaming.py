@@ -12,6 +12,7 @@ import csv
 import tweepy
 from yahoo_finance import Share
 from pymongo import MongoClient
+import json
 consumer_key = "43b4urzsW8nMY3oGzB5tIIM8B"
 consumer_secret = "fbGLMhkFyipYbTAz0s0S6yrN6cDGGWnEMmNaciceYjr4sgEdP2"
 
@@ -23,21 +24,6 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-#Change count to change the number of tweets returned
-myCount = 1
-tweets = []
-ticker = ""
-Apple = Share('AAPL')
-print "The opening price of Apple was " + Apple.get_open() + "\n"
-api.filter(track=['Apple', 'stock'])
-results = api.search(q="#Apple #stock",count = myCount)
-save_file = open('tweets.json', 'a')
-save_file.write(str(results))
-
-
-for result in results:
-    print (result.text)
-
 		
 def csv_reader(file_obj):
     """
@@ -45,7 +31,7 @@ def csv_reader(file_obj):
     """
     StockList = []
     reader = csv.reader(file_obj)
-    for row in reader:
+    for line in reader:
         stock = set(line[0].strip() for line in reader)	
         StockList.append(stock)
         #print stock	
@@ -54,5 +40,23 @@ def csv_reader(file_obj):
 if __name__ == "__main__":
     csv_path = "constituents.csv"
     with open(csv_path, "rb") as f_obj:
-        csv_reader(f_obj)
+       stocklist = csv_reader(f_obj)
+    
+    #Change count to change the number of tweets returned
+    tweetCount = 1
+    #print stocklist[2]
+    tweets = []
+    ticker = ""
+    Apple = Share('AAPL')
+    
+    
+    print "The opening price of Apple was " + Apple.get_open() + "\n"
+    results = api.search(q="#Apple #stock",count = tweetCount)
+    data = [s.text.encode('results') for s in statuses]
+    print data
+    print "Writing to JSON file...\n"
+    for result in results:
+		save_file = open('tweets.json', 'a')
+		save_file.write(str(results))
+		print (result.text)
 
