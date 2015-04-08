@@ -1,0 +1,114 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #ffffff;
+  background-image: url("http://www.psdgraphics.com/file/colorful-triangles-background.jpg");
+  background-size:   cover;                      /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  font-family: Arial;
+  overflow: hidden;
+}
+.cashtag {
+  font-family: 'Shadows Into Light', serif;
+  font-size: 50px;
+  font-weight: bold;
+  color: rgb(72,61,139);
+  text-align: center;
+}
+#intro {
+  width: 500px;
+  height: 300px;
+  background-color: gray;
+  opacity: 0.5;
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 100px;
+  left: -250px;
+  border-radius: 20px;
+  background-image: url(http://www.longboo.com/demo/ext-gantt/ext-gantt/examples/styles/images/bg-lines.gif)
+
+}
+#container {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.highcharts-background, .highcharts-scrollbar, .highcharts-range-selector-buttons, .highcharts-input-group, .highcharts-navigator {
+  visibility: hidden;
+}
+
+.highcharts-grid {
+  opacity: 0.2;
+}
+
+.blocker {
+  width: '480px';
+  height: '200px';
+  background: rgba(194,255,243,0.7);
+  box-shadow: 0px 0px 12px rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.75);
+  text-align: center;
+  cursor: default;
+}
+
+.blocker:hover {
+  box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.75);
+}
+
+  .blocker .header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(100,100,100,0.75);
+    text-shadow: 0px 0px 12px rgba(255,255,255,1);
+
+  }
+
+  .blocker .text {
+    position: absolute;
+    text-align: left;
+    top: 50px;
+    left: 20px;
+    right: 20px;
+    font-size: 16px;
+    color: rgba(100,100,100,0.75);
+  }
+
+
+#search {
+  opacity: 0;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+#search input {
+  opactiy: 0;
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #0080ff;
+  padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  -webkit-border-radius: 0px; /* workaround for ios safari */
+}
+
+#search button {
+  opactiy: 0;
+  color: #0080ff;
+  background-color: transparent;
+  border: 1px solid #0080ff;
+  padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
