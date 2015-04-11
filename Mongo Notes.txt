@@ -1,0 +1,6 @@
+MongoDB
+
+Type mongod
+Open a new tab - Type mongo
+Follow instructions on http://docs.mongodb.org/manual/tutorial/getting-started/#connect-to-a-mongod
+mongoimport -d StockTwits --collection StockTwitsCollection --file testdata.json
