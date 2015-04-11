@@ -1,0 +1,218 @@
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+	font-size: 13px;
+	background-color: black;
+}
+*
+{
+  margin: 0 auto 0 auto;
+ text-align:left;}
+
+#page
+{
+  display: block; 
+  height:auto;
+  position: relative; 
+  overflow: hidden; 
+  width: 670px;
+  background-color: gray;
+
+}
+
+.topNaviagationLink
+{
+text-align:center;
+position:relative;
+margin-top:30px;
+font-size:16px;
+/* margin-left:-10px; */
+width:121px;
+height: 35px;
+line-height: 35px;
+float:left;
+color:#CEEAEE;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+
+.topNaviagationLink a
+{
+text-decoration:none;
+
+color:#CDE2FC;
+
+}
+
+.topNaviagationLink a:hover
+{
+text-align:center;
+border-bottom:none;
+color:#0C61C9;
+display: block;
+width:121px;
+height: 35px;
+line-height: 35px;
+background-image:url(img/tab.png);
+
+}
+
+#mainPicture
+{
+width:700px;
+height:450px;
+background-color:rgb(218, 184, 124);
+top: 100px;
+position: relative;
+}
+
+/*
+#mainPicture
+{
+width:670px;
+height:400px;
+background-color:#FFFFFF;
+}
+*/
+
+#mainPicture .picture
+{
+position:inherit;
+width:650px;
+height:325px;
+border: 2px;
+margin-left:25px;
+}
+
+#headerTitle
+{
+position:relative;
+
+top:30px;
+font-size:25px;
+color:#0a0a0a;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+width: 118px;
+height: auto;
+background-color: white;
+border: none;
+}
+
+#headerSubtext
+{
+position:relative;
+top:30px;
+left:50px;
+font-size:14px;
+color:#A9C8FA;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+}
+
+.contentBox
+{
+width:9000px;
+height:auto;
+background-color:#FFFFFF;
+margin-top:10px;
+}
+
+/*
+.contentBox .innerBox
+{
+position:relative;
+width:650px;
+height:auto;
+top:10px;
+margin-left:10px;
+background-image:url(img/content_back.png);
+background-repeat:repeat-x;
+padding-bottom:35px;
+}
+*/
+
+.contentTitle
+{
+font-size:19px;
+margin-bottom:0px;
+padding-top:18px;
+margin-left:15px;
+margin-top:15px;
+}
+
+.contentText
+{
+font-size:13px;
+line-height:24px;
+margin-left:13px;
+margin-right:13px;
+}
+
+#footer {
+
+width: 650px;
+/* padding-top:100px 100px 100px 100px; */
+background-color: #116985;
+
+/* overflow: hidden; */ 
+
+display:inline-block;
+text-align:center;
+position:relative;
+margin-top:6px;
+font-size:16px;
+/* height: 100px; */
+/* line-height: 16px */;
+float:center;
+/*color:#CEEAEE;*/
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+top: 37px;;
+
+}
+
+.footClass {
+font-size:25px;
+padding: 5px 5px 5px 5px;
+float:center;
+color:#CEEAEE;
+font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
+display: inline-block;
+background-color: gray;
+padding-top: 5px;
+}
+/* }  this is the boxes of letters*/
+
+/*
+#footer a
+{
+text-decoration:none;
+font-size:90px;
+color:#386172;
+margin-top:10px;
+display: block;
+position: relative;
+text-align: center;
+}
+*/
+
+#cr{
+	display: block;
+	position: relative;
+	float: center;
+	text-align: center;
+}
+
+/*
+.cr {
+	 display:inherit; 
+	 text-align: center; 
+	 float: center; 
+	position:relative;
+}
+*/
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
