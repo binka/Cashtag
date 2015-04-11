@@ -1,6 +1,6 @@
 # Cashtag
 
-by David Bittle, Christopher Gray, Prad Kikkeri, Kirill Novik, Lincoln Samelson, Alex Worth
+by David Bittle, Chris Gray, Prad Kikkeri, Kirill Novik, Lincoln Samelson, Alex Worth
 Big Data Spring 2015
 
 Main GitHub repository for CashTag project.
