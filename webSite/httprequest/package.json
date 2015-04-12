@@ -1,0 +1,13 @@
+{
+  "name": "httprequest",
+  "version": "1.0.0",
+  "description": "http request tutorial",
+  "main": "index.js",
+  "dependencies": {
+    "express": "~4.0.0",
+    "mongodb": "^2.0.25",
+    "mongoose": "^4.0.0"
+  },
+  "author": "Kirill Novik",
+  "license": "ISC"
+}

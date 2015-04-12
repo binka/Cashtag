@@ -1,5 +1,4 @@
-var table = [
-  ["Meet PlayStation Underground: <a href='http://bit.ly/1yt7P0d'>link</a>  A new show about video games. We play Amplitude w/ @Harmonix https://youtu.be/S3RS5ZUQZSI", "Playstation Underground"]];
+  var table = ["Hi", "How", "are", "you?", "Not", "So", "Bad", "Maybe", "Hey"];
   var camera, scene, renderer;
   var player;
 
@@ -7,6 +6,8 @@ var table = [
 
   // Floating Element
   var Element = function ( entry ) {
+    //var entry = parseInt(entry);
+    //console.log(entry);
     var index = 0;
     var dom = document.createElement( 'div' );
     dom.style.width = '480px';
@@ -18,7 +19,7 @@ var table = [
     image.style.height = '200px';
     image.style.background = 'rgba(0,0,0,0.5)';
     image.style.opacity = 0;
-    image.src = entry.media$group.media$thumbnail[ 2 ].url;
+    image.src = "http://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Temp_plate.svg/601px-Temp_plate.svg.png";
     dom.appendChild( image );
 
 
@@ -48,8 +49,8 @@ var table = [
     image.addEventListener( 'load', function ( event ) {
 
       //button.style.visibility = 'visible';
-      text.textContent = table[index][0];
-      header.textContent = table[index][1];
+      text.textContent = entry;//parseInt(entry);//table[entry];
+      header.textContent = table[0];
       new TWEEN.Tween( object.position )
         .to( { y: Math.random() * 2000 - 1000 }, 2000 )
         .easing( TWEEN.Easing.Exponential.Out )
@@ -121,10 +122,11 @@ var table = [
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = 0;
+    renderer.domElement.style.zIndex = "0";
     document.getElementById( 'containerGL' ).appendChild( renderer.domElement );
 
     //
-
+/*
     var query = document.getElementById( 'query' );
 
     query.addEventListener( 'keyup', function ( event ) {
@@ -151,6 +153,9 @@ var table = [
     }
 
     search( query.value );
+*/
+//var entries = data.feed.entry;
+    addTiles(60);
 
     document.body.addEventListener( 'mousewheel', onMouseWheel, false );
 
@@ -158,12 +163,6 @@ var table = [
 
       auto = true;
 
-      if ( player !== undefined ) {
-
-        player.parentNode.removeChild( player );
-        player = undefined;
-
-      }
 
       new TWEEN.Tween( camera.position )
           .to( { x: 0, y: - 25 }, 1500 )
@@ -175,62 +174,37 @@ var table = [
     window.addEventListener( 'resize', onWindowResize, false );
 
   }
+  // console.log( entries );
+      function addTiles(num){
+      for ( var i = 0; i < num; i ++ ) {
+        console.log(parseInt(i));
+        scene.add(new Element( table[i%table.length] ));
+      }
+      }
+      // Remove Tiles
+      function removeTiles(){
+        for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
 
-  function search( query ) {
+          ( function () {
 
-    window.location.hash = query;
+            var object = scene.children[ i ];
+            object.textContent = table[i];
+            var delay = i * 15;
 
-    for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+            new TWEEN.Tween( object.position )
+              .to( { y: - 2000 }, 1000 )
+              .delay( delay )
+              .easing( TWEEN.Easing.Exponential.In )
+              .onComplete( function () {
 
-      ( function () {
+                scene.remove( object );
 
-        var object = scene.children[ i ];
-        var delay = i * 15;
+              } )
+              .start();
 
-        new TWEEN.Tween( object.position )
-          .to( { y: - 2000 }, 1000 )
-          .delay( delay )
-          .easing( TWEEN.Easing.Exponential.In )
-          .onComplete( function () {
-
-            scene.remove( object );
-
-          } )
-          .start();
-
-      } )();
-
-    }
-
-    var request = new XMLHttpRequest();
-    request.addEventListener( 'load', onData, false );
-    request.open( 'GET', 'https://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=50&q=' + query, true );
-    request.send( null );
-
-  }
-
-  function onData( event ) {
-
-    var data = JSON.parse( event.target.responseText );
-    var entries = data.feed.entry;
-
-    // console.log( entries );
-
-    for ( var i = 0; i < entries.length; i ++ ) {
-
-      ( function ( data, time ) {
-
-        setTimeout( function () {
-
-          scene.add(new Element( data ));
-
-        }, time );
-
-      } )( entries[ i ], i * 15 );
-
-    }
-
-  }
+          } )();
+        }
+      }
 
   function move( delta ) {
 
