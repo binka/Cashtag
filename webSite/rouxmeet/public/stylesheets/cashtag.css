@@ -32,6 +32,9 @@ body {
   background-image: url(http://www.longboo.com/demo/ext-gantt/ext-gantt/examples/styles/images/bg-lines.gif)
 
 }
+#containerGL {
+  z-index: 0;
+}
 #container {
   position: absolute;
   width: 100%;
@@ -84,7 +87,7 @@ body {
 
 
 #search {
-  opacity: 0;
+
   position: absolute;
   bottom: 30px;
   width: 100%;

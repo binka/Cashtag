@@ -59,15 +59,15 @@ $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json
                             var point = this.x + ': ' + this.y + ' was last selected';
                             auto = true;
                             $.get("/test/" + this.x, function(data1, status){ // sending a get request to the node server to then talk to the database
-                              table[0] = [data1];
-                              console.log("Point Indes: " + point);
+                              table[0] = data1;
+                              console.log(data1);
+                              new TWEEN.Tween( camera.position ) // we will only see new Tiles if the route is correct
+                                  .to( { x: 0, y: - 25 }, 1500 )
+                                  .easing( TWEEN.Easing.Exponential.Out )
+                                  .start();
+                              removeTiles();
+                              addTiles(60);
                             });
-                            //table[0] = ["PlayStation Music, which lets you play Spotify during games, launches in 41 countries around the world http://on.mash.to/1xtuC0D ","Play Station Music"];
-                            new TWEEN.Tween( camera.position )
-                                .to( { x: 0, y: - 25 }, 1500 )
-                                .easing( TWEEN.Easing.Exponential.Out )
-                                .start();
-                            search(query);
 
                         }
                     }
