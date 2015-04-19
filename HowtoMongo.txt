@@ -2,6 +2,13 @@
 
 mongoimport -d test -c shops appleTest.json
 
+
+mongoimport -d cashtag -c StockTwits2010 stocktwits_messages_2010-01-01-2010-12-31.json
+&& mongoimport -d cashtag -c StockTwits2011 stocktwits_messages_2011-01-01-2011-12-31.json
+&& mongoimport -d cashtag -c StockTwits2012 stocktwits_messages_2012-01-01-2012-12-31.json 
+&& mongoimport -d cashtag -c StockTwits2013 stocktwits_messages_2013-01-01-2013-12-31.json
+&& mongoimport -d cashtag -c StockTwits2014 stocktwits_messages_2014-01-01-2013-12-31.json
+
 -d is followed by the database you want to push it to
 -c is followed by the collection within that database that you want to push the stuff into
 then you have the name of the json file you want to push
@@ -17,8 +24,26 @@ The second {} lets you select which columns you are querying for. id:1 means you
 
 db.collection.remove()
 
-Examples:
 
-To find tweets about specific stock ticker use the following:
-	
-	db.StockTwits2010.find({"symbols": {$elemMatch:{symbol:"ES_F"}}})
+db.{ {}, "entities" : [ { "sentiment":["basic":"Bullish" } ]] }
+
+db.StockTwits2014.find({entities:{sentiment:{basic:"Bearish"}}})
+
+db.StockTwits2014.find({"symbols":{"0":AAPL})
+
+
+db.StockTwits2014.find({"symbols":{"0":{"basic":"Bearish"}}})
+
+
+
+db.StockTwits2014.find({"entities":{"sentiment":{"basic":"Bearish"}}}).
+
+db.StockTwits2014.find({symbols.*.symbol"sentiment":{"basic":"Bearish"}}}).
+
+
+db.foo.find( { a.* : 4 } )
+
+
+
+
+db.StockTwits2014.find({ symbols: { $elemMatch: { symbol:"AAPL" } },"entities":{"sentiment":{"basic":"Bearish"}}, created_at:{$regex: "2014-06.*"}},{body:1,created_at:1}).limit

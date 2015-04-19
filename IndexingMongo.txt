@@ -1,0 +1,74 @@
+db.full_set.aggregate([ { $match: { date: "20120105" } }, { $out: "subset" } ]);
+
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"AAPL" } }}},{$out:"Apple2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"MSFT" } }}},{$out:"Microsoft2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"FORD" } }}},{$out:"Ford2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"HMC" } }}},{$out:"Honda2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"SNE" } }}},{$out:"Sony2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"NTDOY" } }}},{$out:"Nintendo2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"MMM" } }}},{$out:"3M2014"}]); 
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"AXP" } }}},{$out:"American Express2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"BA" } }}},{$out:"Boeing2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"CVX" } }}},{$out:"Chevron2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"CSCO" } }}},{$out:"Cisco2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"KO" } }}},{$out:"CocaCola2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"DIS" } }}},{$out:"Disney2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"BA" } }}},{$out:"Boeing2014"}]);
+
+
+
+
+
+
+
+
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"DD" } }}},{$out:"duPont2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"XOM" } }}},{$out:"ExxonMobil2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"GE" } }}},{$out:"GeneralElectric2014"}]);
+db.StockTwits2014.aggregate([{$match:{ 'symbols': { '$elemMatch': { 'symbol':"GS" } }}},{$out:"GoldmanSachs2014"}]);
+
+
+
+db.
+
+
+list
+DONE ALREADY
+MMM 3M	
+AXP American Express	
+AAPL Apple	
+BA Boeing	
+CAT Caterpillar	
+CVX Chevron	
+CSCO Cisco	
+KO Coca-Cola	
+DIS Disne
+DD duPontdeNemours
+XOM ExxonMobil	
+GE GeneralElectric	
+GS GoldmanSachs	
+
+
+
+
+
+NOT DONE YET
+
+
+HD Home Depot	
+IBM IBM	160.67	
+INTC Intel	
+JNJ Johnson & Johnson	
+JPM JPMorgan Chase	
+MCD McDonald's	
+MRK Merck	
+MSFT Microsoft	
+NKE Nike	
+PFE Pfizer	
+PG Procter & Gamble	
+TRV Travelers Companies Inc	
+UTX United Technologies	
+UNH UnitedHealth	
+VZ Verizon	
+V Visa	
+WMT Wal-Mart
