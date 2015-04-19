@@ -42,18 +42,24 @@ with open('/home/user/Dropbox/bigData/appleTest.txt', 'r') as f:
 
 oneDocument = json.loads(first_line)
 
-print(oneDocument['text'])
+#print(oneDocument['text'])
     
-#client = MongoClient()
-#db = client['mydb']
-#collection = db.testData
+client = MongoClient()
+db = client['mydb']
+collection = db.testData
 
-#post = tweets_data
-#post = oneDocument
-#posts = db.posts
-#post_id = posts.insert(post)
+post = tweets_data
+post = oneDocument
+posts = db.posts
+#post_id = posts.insert(post['text'])
 
+print(post['text'])
 
+data = {}
+data['text'] = post['text']
+json_data = json.dumps(data)
+
+post_id = posts.insert(data)
 
 
 

@@ -1,0 +1,18 @@
+#Commands for importing json files into a mongo db
+
+mongoimport -d test -c shops appleTest.json
+
+-d is followed by the database you want to push it to
+-c is followed by the collection within that database that you want to push the stuff into
+then you have the name of the json file you want to push
+
+
+
+
+#Querying MongoDB database
+
+db.shops.find({},{id:1})
+The first {} is where you put restrictions on what you want from a certain field.  Like id > 500 could go there
+The second {} lets you select which columns you are querying for. id:1 means you will get the id field back.  You can also just exclude certain one by saying id:0
+
+db.collection.remove()
