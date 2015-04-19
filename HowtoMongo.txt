@@ -16,3 +16,9 @@ The first {} is where you put restrictions on what you want from a certain field
 The second {} lets you select which columns you are querying for. id:1 means you will get the id field back.  You can also just exclude certain one by saying id:0
 
 db.collection.remove()
+
+Examples:
+
+To find tweets about specific stock ticker use the following:
+	
+	db.StockTwits2010.find({"symbols": {$elemMatch:{symbol:"ES_F"}}})
