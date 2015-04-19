@@ -2,7 +2,6 @@ body {
   margin: 0;
 }
 .headerMenu {
-  z-index: 10;
   padding-top: 10px;
   padding-bottom: 10px;
   height: 30px;

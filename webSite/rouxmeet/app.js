@@ -20,31 +20,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.get('/test/1368144000000', function(req,res){
-  MongoClient.connect("mongodb://localhost/", function(err, db) {
-     var newDB = db.db("newDB");
-     newDB.collection("tempCollection", findItems);
-     function findItems(err, words){
-       words.find({"item":"ABC1"}, function(err, cursor){
-         displayWords("Words starting with a, b or c: ", cursor);
-         //console.log(cursor);
-       });
-     };
-  function displayWords(msg, cursor, pretty){
-    cursor.toArray(function(err, itemArr){
-      //console.log("\n"+msg);
-      res.send(itemArr[0]["item"]);
-    });
-  };
-     //newDB.createCollection("newCollection", function(err, collection){
-      // collection.stats(function(err, stats){
-      //   res.send(JSON.stringify(stats.paddingFactorNote));
-      //   db.close();
-      // });
-     //});
-    });
-  //res.send('Test');
+
+/// setup routes for every date represented on the chart
+app.get('/test/1368144000000', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+    MongoClient.connect("mongodb://54.149.244.192/", function(err, db) {
+      console.log("Inside the Mongo Client");
+      var newDB = db.db("cashtag");
+      var collection = newDB.collection("StockTwits2014");
+      collection.find({}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
+          console.log(result[0]["body"]);
+          res.send(result[0]["body"]);
+      });
+  });
+
 });
+
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
