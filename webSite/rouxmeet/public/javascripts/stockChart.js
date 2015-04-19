@@ -12,7 +12,7 @@ $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json
           enabled: false
         },
         navigator: {
-          enabled: false
+          enabled: true
         },
         navigation: {
           buttonOptions: {
