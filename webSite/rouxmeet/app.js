@@ -4,7 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-
+var ObjectID = require('mongodb').ObjectID;
 var routes = require('./routes/index');
 
 var app = express();
@@ -22,12 +22,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 /// setup routes for every date represented on the chart
-app.get('/test/1368144000000', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+app.get('/:date', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
     MongoClient.connect("mongodb://54.149.244.192/", function(err, db) {
       console.log("Inside the Mongo Client");
+      console.log(req.params.date);
+      var date = new Date(Number(req.params.date));
+      function pad(num, size) {
+          var s = "0" + num;
+          return s.substr(s.length-size);
+      }
+      var formattedDate = "2014-" + pad((date.getMonth()), 2) + "-" + pad(date.getDate(),2);
+      console.log(formattedDate);
       var newDB = db.db("cashtag");
       var collection = newDB.collection("StockTwits2014");
-      collection.find({}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
+      var regex = toString(formattedDate) + ".*";
+      var OID = new ObjectID("552ac8e591492ab718c28aa8");
+      collection.find({"_id":OID, "id" : 20333618}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
           console.log(result[0]["body"]);
           res.send(result[0]["body"]);
       });
