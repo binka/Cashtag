@@ -84,34 +84,3 @@ body {
     font-size: 16px;
     color: rgba(100,100,100,0.75);
   }
-
-
-#search {
-
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  text-align: center;
-}
-
-#search input {
-  opactiy: 0;
-  color: #ffffff;
-  background-color: transparent;
-  border: 1px solid #0080ff;
-  padding: 10px;
-  font-size: 20px;
-  text-transform: uppercase;
-  -webkit-border-radius: 0px; /* workaround for ios safari */
-}
-
-#search button {
-  opactiy: 0;
-  color: #0080ff;
-  background-color: transparent;
-  border: 1px solid #0080ff;
-  padding: 10px;
-  font-size: 20px;
-  text-transform: uppercase;
-  cursor: pointer;
-}

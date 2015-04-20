@@ -60,7 +60,7 @@
 
     dom.addEventListener( 'mouseover', function () {
 
-      button.style.WebkitFilter = '';
+      //button.style.WebkitFilter = '';
       //blocker.style.box-shadow = "0px 0px 12px rgba(0,255,255,0.75)";
       blocker.style.background = 'rgba(194,255,243,0.7)';
       //blocker.style.border = "1px solid rgba(127,255,255,0.75)";
@@ -69,7 +69,7 @@
 
     dom.addEventListener( 'mouseout', function () {
 
-      button.style.WebkitFilter = 'grayscale()';
+      //button.style.WebkitFilter = 'grayscale()';
       blocker.style.background = 'rgba(194,255,243,0.75)';
 
     }, false );

@@ -58,7 +58,7 @@ $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json
                             //var point = this.series.data.indexOf(this.point);
                             var point = this.x + ': ' + this.y + ' was last selected';
                             auto = true;
-                            $.get("/test/" + this.x, function(data1, status){ // sending a get request to the node server to then talk to the database
+                            $.get("/" + this.x, function(data1, status){ // sending a get request to the node server to then talk to the database
                               table[0] = data1;
                               console.log(data1);
                               new TWEEN.Tween( camera.position ) // we will only see new Tiles if the route is correct
