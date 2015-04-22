@@ -49,8 +49,8 @@
     image.addEventListener( 'load', function ( event ) {
 
       //button.style.visibility = 'visible';
-      text.textContent = entry;//parseInt(entry);//table[entry];
-      header.textContent = table[0];
+      text.textContent = table[entry][0];//parseInt(entry);//table[entry];
+      header.textContent = table[entry][1];
       new TWEEN.Tween( object.position )
         .to( { y: Math.random() * 2000 - 1000 }, 2000 )
         .easing( TWEEN.Easing.Exponential.Out )
@@ -177,8 +177,8 @@
   // console.log( entries );
       function addTiles(num){
       for ( var i = 0; i < num; i ++ ) {
-        console.log(parseInt(i));
-        scene.add(new Element( table[i%table.length] ));
+        //console.log(parseInt(i));
+        scene.add(new Element(i%table.length));
       }
       }
       // Remove Tiles

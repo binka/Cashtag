@@ -6,7 +6,8 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var routes = require('./routes/index');
-
+var fs = require('fs');
+var obj;
 var app = express();
 
 // view engine setup
@@ -19,10 +20,20 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/:symbol', routes);
 
 /// setup routes for every date represented on the chart
-app.get('/:date', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+/*
+app.get('/:symbol', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+  fs.readFile("./public/data/AAPL.json" , 'utf8', function (err, data) {
+    if (err) throw err;
+    obj = JSON.parse(data);
+    res.send(obj);
+  });
+});
+*/
+app.get('/:symbol/:date', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+    console.log(JSON.stringify(req.params.symbol));
     MongoClient.connect("mongodb://54.149.244.192/", function(err, db) {
       console.log("Inside the Mongo Client");
       console.log(req.params.date);
@@ -31,15 +42,23 @@ app.get('/:date', function(req,res){ // this is the last data point on the stock
           var s = "0" + num;
           return s.substr(s.length-size);
       }
-      var formattedDate = "2014-" + pad((date.getMonth()), 2) + "-" + pad(date.getDate(),2);
+      var formattedDate = date.getFullYear() + "-" + pad((date.getMonth()), 2) + "-" + pad(date.getDate(),2);
       console.log(formattedDate);
       var newDB = db.db("cashtag");
-      var collection = newDB.collection("StockTwits2014");
-      var regex = toString(formattedDate) + ".*";
-      var OID = new ObjectID("552ac8e591492ab718c28aa8");
-      collection.find({"_id":OID, "id" : 20333618}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
-          console.log(result[0]["body"]);
-          res.send(result[0]["body"]);
+
+      var dbCollection = JSON.stringify(req.params.symbol);
+      var collection = newDB.collection(dbCollection.substring(1, dbCollection.length-1));
+      var regex = toString(formattedDate) + "$.*";
+      collection.find({'created_at':{'$regex': formattedDate + '.*'}}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
+          var resArray = [];
+          for (i = 0; i < result.length; i++){
+            var tempArray = [];
+            tempArray.push(result[i]["body"]);
+            tempArray.push(result[i]["user"]["username"]);
+            resArray.push(tempArray);
+          }
+          console.log(resArray);
+          res.send(resArray);
       });
   });
 
