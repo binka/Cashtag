@@ -54,7 +54,10 @@ app.get('/:symbol/:date', function(req,res){ // this is the last data point on t
       var collection = newDB.collection(dbCollection.substring(1, dbCollection.length-1)); // The Object That Represents the Collection inside Mongo
 
       collection.find({'created_at':{'$regex': formattedDate + '.*'}}, {"limit": 500}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
-          var defaultTwit = [["Surprisingly, no Twits about This Stock Symbol are Found in StockTwits for This Day.", "Oops... No Tweets for This Day"]];
+	if (err){
+		return;	
+	}          
+	var defaultTwit = [["Surprisingly, no Twits about This Stock Symbol are Found in StockTwits for This Day.", "Oops... No Tweets for This Day"]];
           var resArray = [];
           for (i = 0; i < result.length; i++){
             var tempArray = [];
