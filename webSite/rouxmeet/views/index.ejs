@@ -6,25 +6,54 @@
 		<title>three.js css3d - youtube</title>
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 		<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheets/cashtag.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/home.css">
 		<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed|Inconsolata:italic|Droid+Sans">
-    		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
 	</head>
 	<body>
-		
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script src="../build/three.min.js"></script>
 		<script src="js/libs/tween.min.js"></script>
 		<script src="js/renderers/CSS3DRenderer.js"></script>
-		<div id="intro"></div>
 		<div id="containerGL"></div>
-		<div id="container"></div>
 		<% include partials/template/header.ejs %>
-		<script src="javascripts/autocomplete.js"></script>
-		<script src="javascripts/floatingTiles.js"></script>
+		<script>
+			$(function() {
+			    var availableTags = [
+						"MMM", "AXP", "AAPL", "BA", "CAT", "CVX", "CSCO", "KO", "DIS", "DD", "XOM", "GE", "GS", "HD", "IBM", "INTC", "JNJ", "JPM", "MCD", "MRK", "MSFT", "NKE", "PFE", "PG", "TRV", "UTX", "UNH", "VZ", "V", "WMT"
+					];
+			    $( "#tags" ).autocomplete({
+			      source: availableTags
+			    });
+					function isInArray(arr,obj) {
+					    return (arr.indexOf(obj) != -1);
+					}
+				  $("#tags").keyup(function (e) {
+				    	var code = (e.keyCode ? e.keyCode : e.which);
+							//alert(code);
+				    	if (code == 13) {
+								//alert("Worked");
+								var text = document.getElementById('tags').value.toUpperCase();
+								if (isInArray(availableTags, text)) {
+									window.location.href = "http://localhost:3000/" + text;
+								} else {
+									window.location.href = "http://localhost:3000/AAPL"
+								}
+
+				    	};
+				    });
+
+			  });
+
+		</script>
+		<script src="javascripts/homeTiles.js"></script>
 		<script type="text/javascript" src="javascripts/stockChart.js"></script>
 		<script src="/js/highstock.js"></script>
 		<script src="/js/modules/exporting.js"></script>

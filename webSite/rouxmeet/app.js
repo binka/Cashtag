@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
+var stockRoutes = require('./routes/stockPage');
 var routes = require('./routes/index');
 var fs = require('fs');
 var obj;
@@ -20,7 +21,8 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/:symbol', routes);
+app.use('/', routes);
+app.use('/:symbol', stockRoutes);
 
 /// setup routes for every date represented on the chart
 /*
@@ -51,13 +53,19 @@ app.get('/:symbol/:date', function(req,res){ // this is the last data point on t
       var dbCollection = JSON.stringify(req.params.symbol); // The req.params.symbol Has Quotation Marks Around It. Take Them Off
       var collection = newDB.collection(dbCollection.substring(1, dbCollection.length-1)); // The Object That Represents the Collection inside Mongo
 
-      collection.find({'created_at':{'$regex': formattedDate + '.*'}}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
+      collection.find({'created_at':{'$regex': formattedDate + '.*'}}, {"limit": 500}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
           var defaultTwit = [["Surprisingly, no Twits about This Stock Symbol are Found in StockTwits for This Day.", "Oops... No Tweets for This Day"]];
           var resArray = [];
           for (i = 0; i < result.length; i++){
             var tempArray = [];
+            var basicSentiment = result[i]["entities"]["sentiment"];
+
             tempArray.push(result[i]["body"]);
             tempArray.push(result[i]["user"]["username"]);
+            tempArray.push(formattedDate);
+            if (basicSentiment != null){ // Add Sentiment if There is One.
+              tempArray.push(JSON.stringify(basicSentiment["basic"]));
+            };
             resArray.push(tempArray);
           }
           console.log(resArray);
@@ -106,4 +114,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
