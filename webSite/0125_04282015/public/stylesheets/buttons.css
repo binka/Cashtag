@@ -1,0 +1,35 @@
+.row {
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+  bottom: 150px;
+  text-align: center;
+}
+.btn {
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  display: inline-block;
+  border-radius: 2px;
+  border: none;
+  height: 20px;
+  padding: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sm {
+  width: 60px;
+}
+
+.ghost {
+  background-color: rgba(0,0,0,0.1);
+  color: #2B3856;
+  border: 1px solid #2B3856;
+
+  transition: .2s ease;
+}
+.ghost:hover {
+    background-color: #2B3856;
+    color: white;
+
+    transition: .2s ease;
+  }

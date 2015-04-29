@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Cashtag</title>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+		<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="stylesheets/cashtag.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/buttons.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed|Inconsolata:italic|Droid+Sans">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+	</head>
+	<body>
+
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="../build/three.min.js"></script>
+		<script src="js/libs/tween.min.js"></script>
+		<script src="js/renderers/CSS3DRenderer.js"></script>
+		<script>
+		  $("document").ready(function(){
+				$("#about").click(function(){
+		      $("#fadingDiv").fadeIn(500);
+		      $(".wrapper").fadeIn(500);
+		      $("#fadingDiv").animate({height:"350px"},500);
+					$("#xButton").click(function(){
+				      $("#fadingDiv").fadeOut();
+				      $(".wrapper").fadeOut();
+				  });
+				});
+				$("#contact").click(function(){
+					new TWEEN.Tween( camera.position ) // we will only see new Tiles if the route is correct
+			        .to( { x: 0, y: - 25 }, 1500 )
+			        .easing( TWEEN.Easing.Exponential.Out )
+			        .start();
+			    removeTiles();
+			    addTeamTiles(18);
+				});
+		  });
+
+		</script>
+		<div id="stockImage"></div>
+		<div id="containerGL"></div>
+		<div id="container"></div>
+		<div class="row">
+			<button class="btn sm ghost" id="buttonAll">All</button>
+			<button class="btn sm ghost" id="buttonBullish">Bullish</button>
+			<button class="btn sm ghost" id="buttonBearish">Bearish</button>
+		</div>
+		<script>
+			$("#buttonBullish").click(function(){
+				removeTiles();
+				addTiles(100, tableBullish);
+			});
+			$("#buttonBearish").click(function(){
+				removeTiles();
+				addTiles(100, tableBearish);
+			});
+			$("#buttonAll").click(function(){
+				removeTiles();
+				addTiles(100, table);
+			});
+		</script>
+		<script src="javascripts/autocomplete.js"></script>
+		<% include partials/template/header.ejs %>
+		<% include partials/template/about.ejs %>
+		<script src="javascripts/stockLogo.js"></script>
+		<script src="javascripts/floatingTiles.js"></script>
+		<script type="text/javascript" src="javascripts/stockChart.js"></script>
+		<script src="/js/highstock.js"></script>
+		<script src="/js/modules/exporting.js"></script>
+	</body>
+</html>

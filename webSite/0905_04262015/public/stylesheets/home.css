@@ -1,0 +1,85 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #ffffff;
+  background-image: url("http://www.psdgraphics.com/file/colorful-triangles-background.jpg");
+  background-size:   cover;                      /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+.cashtag {
+  font-family: 'Shadows Into Light', serif;
+  font-size: 50px;
+  font-weight: bold;
+  color: rgb(72,61,139);
+  text-align: center;
+}
+#intro {
+  width: 500px;
+  height: 300px;
+  background-color: gray;
+  opacity: 0.5;
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 100px;
+  left: -250px;
+  border-radius: 20px;
+  background-image: url(http://www.longboo.com/demo/ext-gantt/ext-gantt/examples/styles/images/bg-lines.gif)
+
+}
+#containerGL {
+  z-index: 0;
+}
+#container {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+
+
+.highcharts-grid {
+  opacity: 0.2;
+}
+
+.blocker {
+  width: '480px';
+  height: '200px';
+  background: rgba(194,255,243,0.7);
+  box-shadow: 0px 0px 12px rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.75);
+  text-align: center;
+  cursor: default;
+}
+
+.blocker:hover {
+  box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.75);
+}
+
+  .blocker .header {
+
+    margin-top: 50px;
+    left: 20px;
+    font-size: 72px;
+    text-align: center;
+
+    color: rgba(100,100,100, 1);
+    text-shadow: 0px 0px 12px rgba(255,255,255,1);
+
+  }
+
+  .blocker .text {
+    position: absolute;
+    text-align: center;
+    top: 50px;
+    left: 20px;
+    right: 20px;
+    font-size: 72px;
+    color: rgba(100,100,100,1);
+  }
