@@ -1,4 +1,4 @@
-  var table = ["Hi", "How", "are", "you?", "Not", "So", "Bad", "Maybe", "Hey"];
+  var table = [["Surprisingly, no Twits about This Stock Symbol are Found in StockTwits for This Day.", "Oops... No Tweets for This Day"]];
   var camera, scene, renderer;
   var player;
 
@@ -49,8 +49,8 @@
     image.addEventListener( 'load', function ( event ) {
 
       //button.style.visibility = 'visible';
-      text.textContent = entry;//parseInt(entry);//table[entry];
-      header.textContent = table[0];
+      text.textContent = table[entry][0];//parseInt(entry);//table[entry];
+      header.textContent = table[entry][1];
       new TWEEN.Tween( object.position )
         .to( { y: Math.random() * 2000 - 1000 }, 2000 )
         .easing( TWEEN.Easing.Exponential.Out )
@@ -60,7 +60,7 @@
 
     dom.addEventListener( 'mouseover', function () {
 
-      button.style.WebkitFilter = '';
+      //button.style.WebkitFilter = '';
       //blocker.style.box-shadow = "0px 0px 12px rgba(0,255,255,0.75)";
       blocker.style.background = 'rgba(194,255,243,0.7)';
       //blocker.style.border = "1px solid rgba(127,255,255,0.75)";
@@ -69,7 +69,7 @@
 
     dom.addEventListener( 'mouseout', function () {
 
-      button.style.WebkitFilter = 'grayscale()';
+      //button.style.WebkitFilter = 'grayscale()';
       blocker.style.background = 'rgba(194,255,243,0.75)';
 
     }, false );
@@ -155,7 +155,7 @@
     search( query.value );
 */
 //var entries = data.feed.entry;
-    addTiles(60);
+    //addTiles(60);
 
     document.body.addEventListener( 'mousewheel', onMouseWheel, false );
 
@@ -177,8 +177,8 @@
   // console.log( entries );
       function addTiles(num){
       for ( var i = 0; i < num; i ++ ) {
-        console.log(parseInt(i));
-        scene.add(new Element( table[i%table.length] ));
+        //console.log(parseInt(i));
+        scene.add(new Element(i%table.length));
       }
       }
       // Remove Tiles
@@ -257,3 +257,4 @@
 
     renderer.render( scene, camera );
   }
+

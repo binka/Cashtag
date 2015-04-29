@@ -4,9 +4,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-
+var ObjectID = require('mongodb').ObjectID;
 var routes = require('./routes/index');
-
+var fs = require('fs');
+var obj;
 var app = express();
 
 // view engine setup
@@ -19,32 +20,59 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.get('/test/1368144000000', function(req,res){
-  MongoClient.connect("mongodb://localhost/", function(err, db) {
-     var newDB = db.db("newDB");
-     newDB.collection("tempCollection", findItems);
-     function findItems(err, words){
-       words.find({"item":"ABC1"}, function(err, cursor){
-         displayWords("Words starting with a, b or c: ", cursor);
-         //console.log(cursor);
-       });
-     };
-  function displayWords(msg, cursor, pretty){
-    cursor.toArray(function(err, itemArr){
-      //console.log("\n"+msg);
-      res.send(itemArr[0]["item"]);
-    });
-  };
-     //newDB.createCollection("newCollection", function(err, collection){
-      // collection.stats(function(err, stats){
-      //   res.send(JSON.stringify(stats.paddingFactorNote));
-      //   db.close();
-      // });
-     //});
-    });
-  //res.send('Test');
+app.use('/:symbol', routes);
+
+/// setup routes for every date represented on the chart
+/*
+app.get('/:symbol', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+  fs.readFile("./public/data/AAPL.json" , 'utf8', function (err, data) {
+    if (err) throw err;
+    obj = JSON.parse(data);
+    res.send(obj);
+  });
 });
+*/
+app.get('/:symbol/:date', function(req,res){ // this is the last data point on the stock chart, and the body of this function is what happens when you click on it
+    console.log(JSON.stringify(req.params.symbol));
+    MongoClient.connect("mongodb://54.149.244.192/", function(err, db) { // Start MongoClient (Connect to the Server)
+      if (err) { // In Case of the Error Occurence Exit the Function. The Server will not Go down This Way.
+        return;
+      }
+      console.log("Inside the Mongo Client");
+      console.log(req.params.date); // Grab the ":date" Part of the Route inside app.get('/:symbol/:date'); This will be Used to Access Data in MongoDB
+      var date = new Date(Number(req.params.date)); // Convert the Date into the JS Time Stamp
+      function pad(num, size) { // Auxilary Function That Helps to Convert the JS Time Stamp into the YYYY-MM-DD Format
+          var s = "0" + num;
+          return s.substr(s.length-size);
+      }
+      var formattedDate = date.getFullYear() + "-" + pad((date.getMonth()), 2) + "-" + pad(date.getDate(),2); // Convert the JS Time Stamp into the YYYY-MM-DD Format
+      console.log(formattedDate);
+      var newDB = db.db("cashtag"); // The Object That Represents the DB Name
+      var dbCollection = JSON.stringify(req.params.symbol); // The req.params.symbol Has Quotation Marks Around It. Take Them Off
+      var collection = newDB.collection(dbCollection.substring(1, dbCollection.length-1)); // The Object That Represents the Collection inside Mongo
+
+      collection.find({'created_at':{'$regex': formattedDate + '.*'}}, {"limit": 20}).toArray(function(err, result){ //looking for random tweets. Will be more specific.
+          var defaultTwit = [["Surprisingly, no Twits about This Stock Symbol are Found in StockTwits for This Day.", "Oops... No Tweets for This Day"]];
+          var resArray = [];
+          for (i = 0; i < result.length; i++){
+            var tempArray = [];
+            tempArray.push(result[i]["body"]);
+            tempArray.push(result[i]["user"]["username"]);
+            resArray.push(tempArray);
+          }
+          console.log(resArray);
+          if (resArray.length > 0) { // If the Response is Empty (No Twits Found), Return the Default Twit
+            res.send(resArray);
+          } else {
+            res.send(defaultTwit);
+          }
+      });
+  });
+
+});
+
+
+
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -78,3 +106,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
