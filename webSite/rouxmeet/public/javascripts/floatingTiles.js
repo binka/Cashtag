@@ -1,57 +1,89 @@
-var table = [
-  ["Meet PlayStation Underground: <a href='http://bit.ly/1yt7P0d'>link</a>  A new show about video games. We play Amplitude w/ @Harmonix https://youtu.be/S3RS5ZUQZSI", "Playstation Underground"]];
+  var table = [];
+  var team = [
+    ["Prad Kikerri", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis porta mi, non aliquet nisi lacinia convallis. Sed id molestie nisl, ac lobortis tellus. Cras quis elit a lacus fringilla sagittis vel suscipit massa. Quisque hendrerit suscipit elit dictum pretium. Donec iaculis nibh sit amet neque consequat lacinia. Praesent a mi ut enim auctor laoreet ac non ex. Phasellus eget convallis nisl, quis ultricies enim. Cras vitae nunc vitae sem vulputate tristique vel at arcu. Curabitur dictum elit nunc, ac ornare odio porta non. Aliquam non purus euismod, accumsan nisl vel, efficitur lacus. Curabitur sed finibus ligula, sit amet rhoncus ligula. Mauris sagittis aliquet malesuada.", "/images/team/prad.jpg"],
+    ["David Bittle", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis porta mi, non aliquet nisi lacinia convallis. Sed id molestie nisl, ac lobortis tellus. Cras quis elit a lacus fringilla sagittis vel suscipit massa. Quisque hendrerit suscipit elit dictum pretium. Donec iaculis nibh sit amet neque consequat lacinia. Praesent a mi ut enim auctor laoreet ac non ex. Phasellus eget convallis nisl, quis ultricies enim. Cras vitae nunc vitae sem vulputate tristique vel at arcu. Curabitur dictum elit nunc, ac ornare odio porta non. Aliquam non purus euismod, accumsan nisl vel, efficitur lacus. Curabitur sed finibus ligula, sit amet rhoncus ligula. Mauris sagittis aliquet malesuada.", "/images/team/david.jpg"],
+    ["Lincoln Samelson", "<p><b>Major</b>: Computer Science</br></br><b>Email:</b> lincoln.samelson@colorado.edu</br></br><b>Bio:</b> Lincoln, 21, is a Junior in Computer Science at the University of Colorado, Engineering.   He began learning from his father Randy early in his childhood and has since founded his own hedge fund Lincoln Capital, LLC.   His principal focus is commodity futures,  currencies, and stocks.</p>","/images/team/lincoln.jpg"],
+    ["Alexander Worth", "<p>Lorem ipsum dolor sit amet, </br></br></br>consectetur adipiscing elit. Mauris sagittis porta mi, non aliquet nisi lacinia convallis. Sed id molestie nisl, ac lobortis tellus. Cras quis elit a lacus fringilla sagittis vel suscipit massa. Quisque hendrerit suscipit elit dictum pretium. Donec iaculis nibh sit amet neque consequat lacinia. Praesent a mi ut enim auctor laoreet ac non ex. Phasellus eget convallis nisl, quis ultricies enim. Cras vitae nunc vitae sem vulputate tristique vel at arcu. Curabitur dictum elit nunc, ac ornare odio porta non. Aliquam non purus euismod, accumsan nisl vel, efficitur lacus. Curabitur sed finibus ligula, sit amet rhoncus ligula. Mauris sagittis aliquet malesuada.</p>","/images/team/alex.jpg"],
+    ["Chris Gray", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis porta mi, non aliquet nisi lacinia convallis. Sed id molestie nisl, ac lobortis tellus. Cras quis elit a lacus fringilla sagittis vel suscipit massa. Quisque hendrerit suscipit elit dictum pretium. Donec iaculis nibh sit amet neque consequat lacinia. Praesent a mi ut enim auctor laoreet ac non ex. Phasellus eget convallis nisl, quis ultricies enim. Cras vitae nunc vitae sem vulputate tristique vel at arcu. Curabitur dictum elit nunc, ac ornare odio porta non. Aliquam non purus euismod, accumsan nisl vel, efficitur lacus. Curabitur sed finibus ligula, sit amet rhoncus ligula. Mauris sagittis aliquet malesuada.","/images/team/chris.jpg"],
+    ["Kirill Novik", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis porta mi, non aliquet nisi lacinia convallis. Sed id molestie nisl, ac lobortis tellus. Cras quis elit a lacus fringilla sagittis vel suscipit massa. Quisque hendrerit suscipit elit dictum pretium. Donec iaculis nibh sit amet neque consequat lacinia. Praesent a mi ut enim auctor laoreet ac non ex. Phasellus eget convallis nisl, quis ultricies enim. Cras vitae nunc vitae sem vulputate tristique vel at arcu. Curabitur dictum elit nunc, ac ornare odio porta non. Aliquam non purus euismod, accumsan nisl vel, efficitur lacus. Curabitur sed finibus ligula, sit amet rhoncus ligula. Mauris sagittis aliquet malesuada.", "/images/team/kirill.jpg"]];
+    var tableBullish = [];
+    var tableBearish = [];
+
   var camera, scene, renderer;
   var player;
 
   var auto = true;
 
   // Floating Element
-  var Element = function ( entry ) {
+  var Element = function ( entry, table ) {
+    //var entry = parseInt(entry);
+    //console.log(entry);
     var index = 0;
     var dom = document.createElement( 'div' );
-    dom.style.width = '480px';
-    dom.style.height = '200px';
+    dom.style.width = '960px';
+    dom.style.height = '400px';
 
     var image = document.createElement( 'img' ); // this element is needed because it has "load" event, and it seems "div" does not.
     image.style.position = 'absolute';
-    image.style.width = '480px';
-    image.style.height = '200px';
+    image.style.width = '960px';
+    image.style.height = '400px';
     image.style.background = 'rgba(0,0,0,0.5)';
     image.style.opacity = 0;
-    image.src = entry.media$group.media$thumbnail[ 2 ].url;
+    image.src = "/images/blocker.png";
     dom.appendChild( image );
 
 
     var blocker = document.createElement( 'div' );
     blocker.className = 'blocker';
     blocker.style.position = 'absolute';
-    blocker.style.width = '480px';
-    blocker.style.height = '200px';
+    blocker.style.width = '960px';
+    blocker.style.height = '400px';
     dom.appendChild( blocker );
 
     var header = document.createElement( 'div' );
       header.className = 'header';
       blocker.appendChild( header );
 
+    var created_at = document.createElement( 'div' );
+        created_at.className = 'created_at';
+        blocker.appendChild( created_at );
+
+    var sentiment = document.createElement( 'div' );
+        sentiment.className = 'sentiment';
+        blocker.appendChild( sentiment );
+
     var text = document.createElement( 'div' );
       text.className = 'text';
       blocker.appendChild( text );
 
     var object = new THREE.CSS3DObject( dom );
-    object.position.x = Math.random() * 4000 - 2000;
+    object.position.x = Math.random() * 8000 - 4000;
     // object.position.y = Math.random() * 2000 - 1000;
-    object.position.y = 3000;
-    object.position.z = Math.random() * - 5000;
+    object.position.y = 6000;
+    object.position.z = Math.random() * - 10000;
 
     //
 
     image.addEventListener( 'load', function ( event ) {
 
-      //button.style.visibility = 'visible';
-      text.textContent = table[index][0];
-      header.textContent = table[index][1];
+      var sentimentItem = table[entry][3];
+      text.textContent = table[entry][0];//parseInt(entry);//table[entry];
+      header.textContent = table[entry][1];
+      created_at.textContent = table[entry][2];
+      if (sentimentItem != null){
+        sentiment.textContent = sentimentItem;
+        if (sentimentItem === '"Bullish"'){
+          blocker.style.backgroundColor = "#c9ffae";
+          blocker.style.opacity = "0.8";
+
+        }
+        if (sentimentItem === '"Bearish"'){
+          blocker.style.backgroundColor = "#ffd7b6";
+          blocker.style.opacity = "0.8";
+        }
+      }
       new TWEEN.Tween( object.position )
-        .to( { y: Math.random() * 2000 - 1000 }, 2000 )
+        .to( { y: Math.random() * 8000 - 4000 }, 4000 )
         .easing( TWEEN.Easing.Exponential.Out )
         .start();
 
@@ -59,17 +91,9 @@ var table = [
 
     dom.addEventListener( 'mouseover', function () {
 
-      button.style.WebkitFilter = '';
-      //blocker.style.box-shadow = "0px 0px 12px rgba(0,255,255,0.75)";
-      blocker.style.background = 'rgba(194,255,243,0.7)';
-      //blocker.style.border = "1px solid rgba(127,255,255,0.75)";
-
     }, false );
 
     dom.addEventListener( 'mouseout', function () {
-
-      button.style.WebkitFilter = 'grayscale()';
-      blocker.style.background = 'rgba(194,255,243,0.75)';
 
     }, false );
 
@@ -79,11 +103,7 @@ var table = [
 
       auto = false;
 
-
-
-      //
-
-      var prev = object.position.z + 400;
+      var prev = object.position.z + 300;
 
       new TWEEN.Tween( camera.position )
         .to( { x: object.position.x, y: object.position.y - 25 }, 1500 )
@@ -107,50 +127,120 @@ var table = [
 
   };
 
+  // Personal Info Element
+  // Personal Info Element
+    var personalInfoElement = function ( entry ) {
+      //var entry = parseInt(entry);
+      //console.log(entry);
+      var index = 0;
+      var dom = document.createElement( 'div' );
+      dom.style.width = '960px';
+      dom.style.height = '800px';
+
+      var image = document.createElement( 'img' ); // this element is needed because it has "load" event, and it seems "div" does not.
+      image.style.position = 'absolute';
+      image.style.width = '250px';
+      image.style.background = 'rgba(0,0,0,0.5)';
+      image.style.right = '40px';
+      image.style.top = '40px';
+      image.style.zIndex = '10';
+      image.src = team[entry][2];
+      dom.appendChild( image );
+
+
+      var blocker = document.createElement( 'div' );
+      blocker.className = 'blocker';
+      blocker.style.position = 'absolute';
+      blocker.style.width = '960px';
+      blocker.style.height = '800px';
+      dom.appendChild( blocker );
+
+      var header = document.createElement( 'div' );
+        header.className = 'header';
+        blocker.appendChild( header );
+
+      var text = document.createElement( 'div' );
+        text.className = 'text';
+        blocker.appendChild( text );
+        text.style.width = '600px';
+        text.style.opacity = '1';
+
+      var object = new THREE.CSS3DObject( dom );
+      object.position.x = Math.random() * 8000 - 4000;
+      // object.position.y = Math.random() * 2000 - 1000;
+      object.position.y = 6000;
+      object.position.z = Math.random() * - 10000;
+
+      //
+
+      image.addEventListener( 'load', function ( event ) {
+
+        //button.style.visibility = 'visible';
+        //parseInt(entry);//table[entry];
+        header.textContent = team[entry][0];
+        text.innerHTML = team[entry][1];
+
+        new TWEEN.Tween( object.position )
+          .to( { y: Math.random() * 8000 - 4000 }, 4000 )
+          .easing( TWEEN.Easing.Exponential.Out )
+          .start();
+
+      }, false );
+
+      dom.addEventListener( 'mouseover', function () {
+
+      }, false );
+
+      dom.addEventListener( 'mouseout', function () {
+
+      }, false );
+
+      dom.addEventListener( 'click', function ( event ) {
+
+        event.stopPropagation();
+
+        auto = false;
+
+        var prev = object.position.z + 400;
+
+        new TWEEN.Tween( camera.position )
+          .to( { x: object.position.x, y: object.position.y - 25 }, 1500 )
+          .easing( TWEEN.Easing.Exponential.Out )
+          .start();
+
+        new TWEEN.Tween( { value: prev } )
+          .to( { value: 0  }, 2000 )
+          .onUpdate( function () {
+
+            move( this.value - prev );
+            prev = this.value;
+
+          } )
+          .easing( TWEEN.Easing.Exponential.Out )
+          .start();
+
+      }, false );
+
+      return object;
+
+    };
+
   init();
   animate();
 
   function init() {
 
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 5000 );
+    camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 1, 5000 );
     camera.position.y = - 25;
 
     scene = new THREE.Scene();
 
-    renderer = new THREE.CSS3DRenderer();
+    renderer = new THREE.CSS3DRenderer({ antialias: true });
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = 0;
+    renderer.domElement.style.zIndex = "0";
     document.getElementById( 'containerGL' ).appendChild( renderer.domElement );
-
-    //
-
-    var query = document.getElementById( 'query' );
-
-    query.addEventListener( 'keyup', function ( event ) {
-
-      if ( event.keyCode === 13 ) {
-
-        search( query.value );
-
-      }
-
-    }, false );
-
-    var button = document.getElementById( 'button' );
-    button.addEventListener( 'click', function ( event ) {
-
-      search( query.value );
-
-    }, false );
-
-    if ( window.location.hash.length > 0 ) {
-
-      query.value = window.location.hash.substr( 1 );
-
-    }
-
-    search( query.value );
 
     document.body.addEventListener( 'mousewheel', onMouseWheel, false );
 
@@ -158,12 +248,6 @@ var table = [
 
       auto = true;
 
-      if ( player !== undefined ) {
-
-        player.parentNode.removeChild( player );
-        player = undefined;
-
-      }
 
       new TWEEN.Tween( camera.position )
           .to( { x: 0, y: - 25 }, 1500 )
@@ -176,61 +260,48 @@ var table = [
 
   }
 
-  function search( query ) {
+  // Add Twit Tiles
+      function addTiles(num, table){
+        for ( var i = 0; i < num; i ++ ) {
+          //console.log(parseInt(i));
+          scene.add(new Element(i%table.length, table));
+        }
+      }
+  // Add Sentiment Tiles
 
-    window.location.hash = query;
 
-    for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+  // Add Team Tiles
+      function addTeamTiles(num){
+        for ( var i = 0; i < num; i ++ ) {
+          //console.log(parseInt(i));
+          scene.add(new personalInfoElement(i%team.length));
+        }
+      }
 
-      ( function () {
+      // Remove Tiles
+      function removeTiles(){
+        for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
 
-        var object = scene.children[ i ];
-        var delay = i * 15;
+          ( function () {
 
-        new TWEEN.Tween( object.position )
-          .to( { y: - 2000 }, 1000 )
-          .delay( delay )
-          .easing( TWEEN.Easing.Exponential.In )
-          .onComplete( function () {
+            var object = scene.children[ i ];
+            object.textContent = table[i];
+            var delay = i * 15;
 
-            scene.remove( object );
+            new TWEEN.Tween( object.position )
+              .to( { y: - 4000 }, 1000 )
+              .delay( delay )
+              .easing( TWEEN.Easing.Exponential.In )
+              .onComplete( function () {
 
-          } )
-          .start();
+                scene.remove( object );
 
-      } )();
+              } )
+              .start();
 
-    }
-
-    var request = new XMLHttpRequest();
-    request.addEventListener( 'load', onData, false );
-    request.open( 'GET', 'https://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=50&q=' + query, true );
-    request.send( null );
-
-  }
-
-  function onData( event ) {
-
-    var data = JSON.parse( event.target.responseText );
-    var entries = data.feed.entry;
-
-    // console.log( entries );
-
-    for ( var i = 0; i < entries.length; i ++ ) {
-
-      ( function ( data, time ) {
-
-        setTimeout( function () {
-
-          scene.add(new Element( data ));
-
-        }, time );
-
-      } )( entries[ i ], i * 15 );
-
-    }
-
-  }
+          } )();
+        }
+      }
 
   function move( delta ) {
 
@@ -242,11 +313,11 @@ var table = [
 
       if ( object.position.z > 0 ) {
 
-        object.position.z -= 5000;
+        object.position.z -= 10000;
 
-      } else if ( object.position.z < - 5000 ) {
+      } else if ( object.position.z < - 10000 ) {
 
-        object.position.z += 5000;
+        object.position.z += 10000;
 
       }
 
