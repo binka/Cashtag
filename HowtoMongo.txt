@@ -47,3 +47,7 @@ db.foo.find( { a.* : 4 } )
 
 
 db.StockTwits2014.find({ symbols: { $elemMatch: { symbol:"AAPL" } },"entities":{"sentiment":{"basic":"Bearish"}}, created_at:{$regex: "2014-06.*"}},{body:1,created_at:1}).limit
+
+To find tweets about specific stock ticker use the following:
+	
+	db.StockTwits2010.find({"symbols": {$elemMatch:{symbol:"ES_F"}}})
