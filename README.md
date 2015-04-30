@@ -12,7 +12,7 @@ All folders are for frontend interface.
 
 Initially, we used a series of python scripts to read tweets directly from StockTwits' and Twitter's live feed. However, we have since migrated to StockTwits and used their historical data since 2010, which is in JSON format.
 
-We have a constituents.csv that lists all the stock symbols for reference.
+We have a constituents.csv that lists all the stock symbols in the S&P 500 for reference. Currently, our website only indexes the DOW top 30: "AXP", "AAPL", "BA", "CAT", "CVX", "CSCO", "KO", "DIS", "DD", "XOM", "GE", "GS", "HD", "IBM", "INTC", "JNJ", "JPM", "MCD", "MRK", "MMM", "MSFT", "NKE", "PFE", "PG", "TRV", "UTX", "UNH", "VZ", "V", "WMT"
 
 Website URL: http://cashtag-cu.com:3000/AAPL
 
